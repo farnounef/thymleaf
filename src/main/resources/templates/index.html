@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- Ajouter le lien vers Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Ajoute un peu d'espace autour du tableau */
+    table {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body class="text-center">
+<div class="container">
+  <div th:switch="${users}">
+    <h2 th:case="null">No users yet!</h2>
+    <div th:case="*">
+      <h2>Users</h2>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+          <td th:text="${user.name}"></td>
+          <td th:text="${user.email}"></td>
+          <td><a class="btn btn-primary btn-sm" th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
+          <td><a class="btn btn-danger btn-sm" th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      <a class="btn btn-success" href="/signup">Add a new user</a>
+    </p>
+  </div>
+</div>
+
+<!-- Ajouter le lien vers Bootstrap JavaScript (si nécessaire) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
